@@ -1,0 +1,522 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIS Mutual Fund</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            font-family: "Futura PT", sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        #header {
+            background-color: #ffffff; 
+            text-align: center;
+            padding: 2rem;
+            font-size: 32px;
+            color:  #000000 ;
+        }
+        #header2 {
+            background-color: #fff8fb; 
+            text-align: center;
+            padding: 2rem;
+            font-size: 32px;
+            color:  #b01c54 ;
+        }
+        
+        #bar-graph {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 
+                15px -15px 0px rgba(255, 223, 0, 0.8),
+               -15px -15px 0px rgba(238, 130, 238, 0.8),
+               15px 15px 0px rgba(52, 236, 249, 0.8),
+               -15px 15px 0px #FF5733,
+               0px 0px 30px rgba(255, 105, 180, 0.8),
+               0px 0px 30px rgba(238, 130, 238, 0.8),
+                0px 0px 30px rgba(255, 223, 0, 0.8),
+                0px 0px 30px rgba(52, 236, 249, 0.8);
+            margin: 5rem auto;
+            padding: 2rem;
+           max-width: 1300px;
+
+           animation: glowing-border 2s infinite;
+           overflow: visible;
+        }
+        .glowing-header {
+    animation: glowing-border 3s infinite;
+}
+
+@keyframes glowing-border {
+    0% {
+        box-shadow: 
+            15px -15px 0px rgba(247, 247, 247, 0.8),
+            -15px -15px 0px rgba(255, 255, 255, 0.8),
+            15px 15px 0px rgba(239, 239, 239, 0.8),
+            -15px 15px 0px #cacaca,
+            0px 0px 30px rgba(236, 235, 235, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(209, 209, 209, 0.8),
+            0px 0px 30px rgba(210, 210, 210, 0.8);
+    }
+
+    50% {
+        /* ... (middle keyframe values) ... */
+    }
+
+    100% {
+        /* ... (final keyframe values) ... */
+    }
+}
+
+        @keyframes glowing-border {
+    0% {
+        box-shadow: 
+            15px -15px 0px rgba(255, 255, 255, 0.8),
+            -15px -15px 0px rgba(255, 255, 255, 0.8),
+            15px 15px 0px rgba(255, 255, 255, 0.8),
+            -15px 15px 0px #FFFFFF,
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8);
+    }
+
+    50% {
+        box-shadow: 
+            15px -15px 20px rgba(200, 200, 200, 0.8),
+            -15px -15px 20px rgba(200, 200, 200, 0.8),
+            15px 15px 20px rgba(200, 200, 200, 0.8),
+            -15px 15px 20px #C8C8C8,
+            0px 0px 40px rgba(200, 200, 200, 0.8),
+            0px 0px 40px rgba(200, 200, 200, 0.8),
+            0px 0px 40px rgba(200, 200, 200, 0.8),
+            0px 0px 40px rgba(200, 200, 200, 0.8);
+    }
+
+    100% {
+        box-shadow: 
+            15px -15px 0px rgba(150, 150, 150, 0.8),
+            -15px -15px 0px rgba(150, 150, 150, 0.8),
+            15px 15px 0px rgba(150, 150, 150, 0.8),
+            -15px 15px 0px #969696,
+            0px 0px 30px rgba(150, 150, 150, 0.8),
+            0px 0px 30px rgba(150, 150, 150, 0.8),
+            0px 0px 30px rgba(150, 150, 150, 0.8),
+            0px 0px 30px rgba(150, 150, 150, 0.8);
+    }
+}
+        
+    .image-popup {
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .image-popup:hover {
+        transform: scale(1.1);
+    }
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the particles behind other content */
+        }
+        .analysis-section {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.231);
+        }
+
+        .analysis-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-text {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+        .navigation {
+    position: fixed;
+    bottom: 40%; /* Adjust the distance from the bottom as needed */
+    right: 90%;
+    transform: translate(0, 50%); /* Vertically center the buttons */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.navigation button {
+    display: block;
+    font-size: 30px;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navigation button:hover {
+    opacity: 1;
+}
+
+.navigation2 {
+    position: fixed;
+    bottom: 40%; /* Adjust the distance from the bottom as needed */
+    left: 90%;
+    transform: translate(0, 50%); /* Vertically center the buttons */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.navigation2 button {
+    font-size: 30px;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navigation2 button:hover {
+    opacity: 1;
+}
+
+
+        #footer {
+            text-align: center;
+            padding: 1rem;
+            color: #000000;
+        }
+
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="particle-container" class="particle-container"></div>
+    <script>
+        particlesJS("particle-container", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#000000" },
+                shape: { type: "circle", stroke: { width: 0, color: "#000000" }, polygon: { nb_sides: 5 }, image: { src: "img/github.svg", width: 100, height: 100 } },
+                opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
+                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
+                line_linked: { enable: true, distance: 150, color: "#000000", opacity: 0.4, width: 2 }, // Increased line width to 2
+                move: { enable: true, speed: 5, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+            },
+            interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } } },
+            retina_detect: true
+        });
+    </script>    
+    <div class="navigation">
+        <button id="prevBtn" style="display: block;">&larr;</button>
+    </div>
+    <div class="navigation2">
+        <button id="nextBtn" style="display: block;">&rarr;</button>
+    </div>
+    <div id="header2">
+        <img src="{% static "images/baxis.png" %}" alt="" width="400" height="80">
+        <h1>P R E S C R I P T I O N</h1>
+        <p>Suggested ways to improve Axis mutual fund</p>
+    </div>
+    <br>
+    <div class="slide" id="slide1">
+        <div class="image-container">
+            <div class="image-popup">
+                <img src="{% static "images/1p.jpg" %}" alt="" width="700" height="910" />
+            </div>
+        </div>
+    </div>
+    <div class="slide" id="slide2">
+        <div class="image-container">
+            <div class="image-popup">
+                <img src="{% static "images/2p.jpg" %}" alt="" width="700" height="910" />
+            </div>
+        </div>    
+    </div>
+    <div class="slide" id="slide3">
+    <div class="image-container">
+        <div class="image-popup">
+            <img src="{% static "images/3.png" %}" alt="" width="1106" height="1043" />
+        </div>
+    </div>    
+    </div>
+    <div class="slide" id="slide4">
+        <div class="image-container">
+            <div class="image-popup">
+                <img src="{% static "images/4.png" %}" alt="" width="1596" height="1142" />
+            </div>
+        </div>    
+    </div>
+    <div class="slide" id="slide5">
+        <div class="image-container">
+            <div class="image-popup">
+                <img src="{% static "images/5.png" %}" alt="" width="1610" height="937" />
+            </div>
+        </div>    
+</div>
+<div class="slide" id="slide6">
+    <div class="image-container">
+        <div class="image-popup">
+            <img src="{% static "images/6.png" %}" alt="" width="1680" height="703" />
+        </div>
+    </div>
+</div>    
+<div class="slide" id="slide7">
+    <div class="image-container">
+        <div class="image-popup">
+            <img src="{% static "images/7.png" %}" alt="" width="1622" height="635" />
+        </div>
+    </div>
+</div>
+<div class="slide" id="slide6">
+    <div class="image-container">
+        <div class="image-popup">
+            <img src="{% static "images/8p.png" %}" alt="" width="1680" height="703" />
+        </div>
+    </div>
+</div>    
+<div class="slide" id="slide7">
+    <div class="image-container">
+        <div class="image-popup">
+            <img src="{% static "images/9p.png" %}" alt="" width="1622" height="635" />
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <p>© 2023 Sterling Software. All rights reserved.</p>
+</div>    
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlideIndex = 0;
+    
+        function showSlide(index) {
+            slides.forEach((slide, idx) => {
+                if (idx === index) {
+                    slide.style.display = 'block';
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+    
+            prevBtn.style.display = index === 0 ? 'none' : 'block';
+            nextBtn.style.display = index === slides.length - 1 ? 'none' : 'block';
+        }
+    
+        prevBtn.addEventListener('click', () => {
+            currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
+            showSlide(currentSlideIndex);
+        });
+    
+        nextBtn.addEventListener('click', () => {
+            currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
+            showSlide(currentSlideIndex);
+        });
+    
+        showSlide(currentSlideIndex); // Show the initial slide
+    </script>
+    
+    
+    <script>
+        window.requestAnimFrame = function()
+	{
+		return (
+			window.requestAnimationFrame       || 
+			window.webkitRequestAnimationFrame || 
+			window.mozRequestAnimationFrame    || 
+			window.oRequestAnimationFrame      || 
+			window.msRequestAnimationFrame     || 
+			function(/* function */ callback){
+				window.setTimeout(callback, 1000 / 60);
+			}
+		);
+}();
+
+var canvas = document.getElementById('canvas'); 
+var context = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+   canvas.height = window.innerHeight;
+//get DPI
+let dpi = window.devicePixelRatio || 1;
+context.scale(dpi, dpi);
+console.log(dpi);
+
+function fix_dpi() {
+//get CSS height
+//the + prefix casts it to an integer
+//the slice method gets rid of "px"
+let style_height = +getComputedStyle(canvas).getPropertyValue("height").slice(0, -2);
+let style_width = +getComputedStyle(canvas).getPropertyValue("width").slice(0, -2);
+
+//scale the canvas
+canvas.setAttribute('height', style_height * dpi);
+canvas.setAttribute('width', style_width * dpi);
+}
+
+	var particle_count = 70,
+		particles = [],
+		couleurs   = ["#000000", "#000000", "#000000","#000000"];
+    function Particle()
+    {
+
+        this.radius = Math.round((Math.random()*3)+5);
+        this.x = Math.floor((Math.random() * ((+getComputedStyle(canvas).getPropertyValue("width").slice(0, -2) * dpi) - this.radius + 1) + this.radius));
+        this.y = Math.floor((Math.random() * ((+getComputedStyle(canvas).getPropertyValue("height").slice(0, -2) * dpi) - this.radius + 1) + this.radius));
+        this.color = couleurs[Math.floor(Math.random()*couleurs.length)];
+        this.speedx = Math.round((Math.random()*201)+0)/100;
+        this.speedy = Math.round((Math.random()*201)+0)/100;
+
+        switch (Math.round(Math.random()*couleurs.length))
+        {
+            case 1:
+            this.speedx *= 1;
+            this.speedy *= 1;
+            break;
+            case 2:
+            this.speedx *= -1;
+            this.speedy *= 1;
+            break;
+            case 3:
+            this.speedx *= 1;
+            this.speedy *= -1;
+            break;
+            case 4:
+            this.speedx *= -1;
+            this.speedy *= -1;
+            break;
+        }
+            
+        this.move = function()
+        {
+            
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.fillStyle   = this.color;
+            context.globalAlpha = 1;
+            context.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
+            context.fill();
+            context.closePath();
+
+            this.x = this.x + this.speedx;
+            this.y = this.y + this.speedy;
+            
+            if(this.x <= 0+this.radius)
+            {
+                this.speedx *= -1;
+            }
+            if(this.x >= canvas.width-this.radius)
+            {
+                this.speedx *= -1;
+            }
+            if(this.y <= 0+this.radius)
+            {
+                this.speedy *= -1;
+            }
+            if(this.y >= canvas.height-this.radius)
+            {
+                this.speedy *= -1;
+            }
+
+            for (var j = 0; j < particle_count; j++)
+            {
+                var particleActuelle = particles[j],
+                    yd = particleActuelle.y - this.y,
+                    xd = particleActuelle.x - this.x,
+                    d  = Math.sqrt(xd * xd + yd * yd);
+
+                if ( d < 200 )
+                {
+                    context.beginPath();
+                    context.globalAlpha = (200 - d) / (200 - 0);
+                    context.globalCompositeOperation = 'destination-over';
+                    context.lineWidth = 1;
+                    context.moveTo(this.x, this.y);
+                    context.lineTo(particleActuelle.x, particleActuelle.y);
+                    context.strokeStyle = this.color;
+                    context.lineCap = "round";
+                    context.stroke();
+                    context.closePath();
+                }
+            }
+        };
+    };
+    for (var i = 0; i < particle_count; i++)
+    {
+        fix_dpi();
+        var particle = new Particle();
+        particles.push(particle);
+    }
+    function animate()
+    {
+        fix_dpi();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particle_count; i++)
+        {
+            particles[i].move();
+        }
+        requestAnimFrame(animate);
+    }
+    
+    
+
+   
+    animate(); 
+
+    </script>
+    <style>
+        /* Add this CSS code to your <style> section */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            top:10%;
+        }
+    </style>
+    <script>
+        // ... (existing JavaScript code) ...
+    
+        // Add this script to handle the pop-up animation
+        const imagePopups = document.querySelectorAll('.image-popup');
+    
+        imagePopups.forEach(imagePopup => {
+            imagePopup.addEventListener('click', () => {
+                imagePopup.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    imagePopup.style.transform = 'scale(1)';
+                }, 300); // Adjust the duration to match your CSS transition duration
+            });
+        });
+    </script>
+    <script>
+    // ... (existing JavaScript code) ...
+
+    var particle_count = 70,
+        particles = [],
+        couleurs = ["#FF1493", "#00FF00", "#00CED1", "#FFD700"];
+
+    // ... (rest of the JavaScript code) ...
+</script>
+
+    
+</body>
+</html>

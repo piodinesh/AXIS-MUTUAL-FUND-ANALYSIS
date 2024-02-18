@@ -1,0 +1,646 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIS Mutual Fund</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            font-family: "Futura PT", sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        #header {
+            background-color: #ffffff; 
+            text-align: center;
+            padding: 2rem;
+            font-size: 32px;
+            color:  #000000 ;
+        }
+        #header2 {
+            background-color: #e7e7e7; 
+            text-align: center;
+            padding: 2rem;
+            font-size: 32px;
+            color:  #000000 ;
+        }
+        
+        #bar-graph {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 
+                15px -15px 0px rgba(255, 223, 0, 0.8),
+               -15px -15px 0px rgba(238, 130, 238, 0.8),
+               15px 15px 0px rgba(52, 236, 249, 0.8),
+               -15px 15px 0px #FF5733,
+               0px 0px 30px rgba(255, 105, 180, 0.8),
+               0px 0px 30px rgba(238, 130, 238, 0.8),
+                0px 0px 30px rgba(255, 223, 0, 0.8),
+                0px 0px 30px rgba(52, 236, 249, 0.8);
+            margin: 5rem auto;
+            padding: 2rem;
+           max-width: 1300px;
+
+           animation: glowing-border 2s infinite;
+           overflow: visible;
+        }
+        .glowing-header {
+    animation: glowing-border 3s infinite;
+}
+
+@keyframes glowing-border {
+    0% {
+        box-shadow: 
+            15px -15px 0px rgba(247, 247, 247, 0.8),
+            -15px -15px 0px rgba(255, 255, 255, 0.8),
+            15px 15px 0px rgba(239, 239, 239, 0.8),
+            -15px 15px 0px #cacaca,
+            0px 0px 30px rgba(236, 235, 235, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(209, 209, 209, 0.8),
+            0px 0px 30px rgba(210, 210, 210, 0.8);
+    }
+
+    50% {
+        /* ... (middle keyframe values) ... */
+    }
+
+    100% {
+        /* ... (final keyframe values) ... */
+    }
+}
+
+        @keyframes glowing-border {
+    0% {
+        box-shadow: 
+            15px -15px 0px rgba(255, 255, 255, 0.8),
+            -15px -15px 0px rgba(255, 255, 255, 0.8),
+            15px 15px 0px rgba(255, 255, 255, 0.8),
+            -15px 15px 0px #FFFFFF,
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8),
+            0px 0px 30px rgba(255, 255, 255, 0.8);
+    }
+
+    50% {
+        box-shadow: 
+            15px -15px 20px rgba(200, 200, 200, 0.8),
+            -15px -15px 20px rgba(200, 200, 200, 0.8),
+            15px 15px 20px rgba(200, 200, 200, 0.8),
+            -15px 15px 20px #C8C8C8,
+            0px 0px 40px rgba(200, 200, 200, 0.8),
+            0px 0px 40px rgba(200, 200, 200, 0.8),
+            0px 0px 40px rgba(200, 200, 200, 0.8),
+            0px 0px 40px rgba(200, 200, 200, 0.8);
+    }
+
+    100% {
+        box-shadow: 
+            15px -15px 0px rgba(150, 150, 150, 0.8),
+            -15px -15px 0px rgba(150, 150, 150, 0.8),
+            15px 15px 0px rgba(150, 150, 150, 0.8),
+            -15px 15px 0px #969696,
+            0px 0px 30px rgba(150, 150, 150, 0.8),
+            0px 0px 30px rgba(150, 150, 150, 0.8),
+            0px 0px 30px rgba(150, 150, 150, 0.8),
+            0px 0px 30px rgba(150, 150, 150, 0.8);
+    }
+}
+        
+    .image-popup {
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .image-popup:hover {
+        transform: scale(1.1);
+    }
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the particles behind other content */
+        }
+        .analysis-section {
+            background-color: #c31558;
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.231);
+        }
+
+        .analysis-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-text {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+        .navigation {
+    position: fixed;
+    bottom: 40%; /* Adjust the distance from the bottom as needed */
+    right: 90%;
+    transform: translate(0, 50%); /* Vertically center the buttons */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.navigation button {
+    font-size: 30px;
+    padding: 10px 20px;
+    background-color: #b01c54;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navigation button:hover {
+    opacity: 1;
+}
+
+.navigation2 {
+    position: fixed;
+    bottom: 40%; /* Adjust the distance from the bottom as needed */
+    left: 90%;
+    transform: translate(0, 50%); /* Vertically center the buttons */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.navigation2 button {
+    font-size: 30px;
+    padding: 10px 20px;
+    background-color: #b01c54;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navigation2 button:hover {
+    opacity: 1;
+}
+
+
+        #footer {
+            text-align: center;
+            padding: 1rem;
+            color: #000000;
+        }
+
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="particle-container" class="particle-container"></div>
+    <script>
+        particlesJS("particle-container", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#000000" },
+                shape: { type: "circle", stroke: { width: 0, color: "#000000" }, polygon: { nb_sides: 5 }, image: { src: "img/github.svg", width: 100, height: 100 } },
+                opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
+                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
+                line_linked: { enable: true, distance: 150, color: "#000000", opacity: 0.4, width: 2 }, // Increased line width to 2
+                move: { enable: true, speed: 5, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+            },
+            interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } } },
+            retina_detect: true
+        });
+    </script> 
+       
+       <div id="header" class="glowing-header">
+        <img src="{% static "images/haxis.jpg" %}" alt="" width="400" height="100">
+        <p>Your Trusted Partner in Wealth Management</p>
+    </div>
+    <div class="slide" id="slide1">
+    <div id="bar-graph">
+        {{ aum_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The bar graph illustrates the gradual increase in Average Assets Under Management (AAUM) from the year 2011 to the year 2023, divided into four quarters - Q1, Q2, Q3, and Q4 - for each year. Over this period, the AAUM consistently shows an upward trend, reflecting positive growth in assets managed. 
+            This consistent increase can be attributed to various factors such as effective investment strategies, market performance, and client engagement. The steady rise in AAUM across all quarters and years underscores the firm's ability to attract and retain investments, making it a promising trajectory for investors and stakeholders alike. <b>So, the value has increased by approximately 4870.89% from 501304.01 to 24816024.33.</b>
+        </div>
+    </div>
+
+    <!-- PREDICTION -->
+    
+</div>
+    <!-- GRAPH 2 --><div class="slide" id="slide2">
+
+    <div id="bar-graph">
+        {{ box_plot_html|safe }}
+    </div>
+    
+    <!-- Analysis for Balanced Schemes Pie Chart -->
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The box plot succinctly portrays the gradual upward progression of Funds of Funds Overseas from 2011 to 2023. Organized into four quarters - Q1, Q2, Q3, and Q4 - for each respective year, the plot highlights a consistent trend of growth. This increase is indicative of the Funds of Funds Overseas' ability to attract higher investments over time.<b> The expanding boxes and upward shift of the median line signify the steady advancement in performance throughout these years.</b> This depiction underscores the appeal and success of these funds in the overseas market, presenting investors with a reliable avenue for gradual and sustained growth in their investment portfolios.
+        </div>
+    </div>
+</div>
+<div class="slide" id="slide3">
+    <div id="bar-graph">
+        {{ funds_graph_html|safe }}
+    </div>
+
+    <!-- Analysis for Funds of Funds - Domestic Bar Graph -->
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The bar graph visually encapsulates the consistent upward trajectory of Funds of Funds Domestic, spanning from 2011 to 2023. The graph is segmented into four quarters - Q1, Q2, Q3, and Q4 - for each year, providing a comprehensive overview of the gradual increase in performance. This steady rise signifies the Funds of Funds Domestic's consistent appeal to investors, resulting in heightened investments year after year. The ascending bars collectively underscore the funds' sustained growth and reliability within the domestic market. This graph serves as a clear representation of their capacity to deliver gradual and reliable returns to investors over the years, making them a prominent choice for those seeking stable growth within the domestic investment landscape.
+        </div>
+    </div>
+    </div>
+    <!-- GRAPH 4 -->
+    <div class="slide" id="slide4">
+    <div id="bar-graph">
+        {{ box_plott_html|safe }}
+    </div>
+
+    <!-- Analysis for Funds of Funds - Domestic Bar Graph -->
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The box plot visually captures the incremental growth of Funds of Funds Domestic across the years 2011 to 2023. Each year is subdivided into four quarters - Q1, Q2, Q3, and Q4 - revealing a consistent pattern of gradual advancement. The expanding size of the boxes and the upward shift of the median line underscore the steady increase in performance throughout this period. This plot serves as a succinct representation of the Funds of Funds Domestic's ability to deliver sustained growth within the domestic market, making it an attractive option for investors seeking reliable and consistent returns over time.
+        </div>
+    </div>
+</div>
+    <!-- GRAPH 5 --><div class="slide" id="slide5">
+    <div id="bar-graph">
+        {{ top_7_graph_html|safe }}
+    </div>
+    
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The line graph visually illustrates the performance of the top 7 liquid schemes across seven Indian states - Maharashtra, New Delhi, Karnataka, Tamil Nadu, West Bengal, Gujarat, and Haryana. The graph emphasizes Maharashtra's prominent position as the leading performer among these states. Each state's performance is tracked over the specified period, showcasing fluctuations in their respective line trajectories. Maharashtra's line consistently maintains a higher position, underscoring its exceptional performance compared to the other states. This graph effectively portrays Maharashtra's leadership within the group and provides a clear visual representation of its superior performance in terms of the selected liquid schemes.
+        </div>
+    </div>
+</div>
+<div class="slide" id="slide6">
+
+    <div id="bar-graph">
+        {{ remaining_graph_html|safe }}
+    </div>
+    
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The line graph provides a comprehensive view of the performance of the remaining liquid schemes in seven prominent Indian states: Maharashtra, New Delhi, Karnataka, Tamil Nadu, West Bengal, Gujarat, and Haryana. By excluding the top 7 performers, this graph highlights the diverse range of performances in these states. The lines representing each state's liquid schemes reveal fluctuations and trends over the specified period. This visual representation facilitates a comparative analysis, enabling viewers to identify potential growth areas and variations in performance among the states. The graph serves as a valuable tool for investors and analysts, aiding them in assessing the dynamics of the liquid scheme market in different Indian regions.
+        </div>
+    </div>
+</div>
+    <!--
+    <div id="bar-graph">
+        {{ scheme_pie_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The pie chart offers an insightful depiction of the distribution of various fund schemes within Axis Mutual Fund. Each slice of the chart represents a specific fund scheme, displaying their relative proportions within the fund's portfolio. This visual representation provides a quick overview of how investments are spread across different schemes, such as equity funds, debt funds, hybrid funds, solution-oriented funds, index funds, thematic funds, and fund of funds. This pie chart serves as a valuable tool for investors, enabling them to gauge the fund's diversification strategy at a glance and make well-informed decisions aligned with their investment objectives and risk preferences.    
+        </div>
+    </div>   
+    <div id="bar-graph">
+        {{ category_pie_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The donut chart visually communicates the distribution of different mutual fund categories within Axis Mutual Fund in a succinct manner. This chart elegantly represents the proportion of each category, such as equity funds, debt funds, hybrid funds, solution-oriented funds, index funds, thematic funds, and fund of funds. The chart's donut shape adds an additional layer of information by displaying the hierarchy of categories as well as their individual contribution. This representation aids investors in quickly grasping the diversification strategy employed by Axis Mutual Fund and assists them in making investment decisions that align with their financial goals and risk preferences.        
+        </div>
+    </div> 
+-->
+<div class="slide" id="slide9">
+
+    <div id="bar-graph">
+        {{ TOTAL_area_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The area graph visually depicts the distribution of total mutual fund schemes across Indian states in Axis Mutual Fund's portfolio. Maharashtra claims the top position with the highest number of schemes, evident from its larger and consistent area on the graph. This representation underscores Maharashtra's key role as a leading market for Axis Mutual Fund's diverse range of offerings.
+        </div>
+    </div>
+</div>
+    <!--
+    <div id="bar-graph">
+        {{ balanced_pie_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The pie chart above showcases the distribution of Balanced Schemes across different States and Union Territories (UTs). Each slice represents the proportion of Balanced Schemes in the total for each region. The labeled percentage on each slice gives an overview of the contribution of Balanced Schemes from each State/UT. Analyzing this chart helps identify the regions with the highest and lowest contribution to Balanced Schemes. From the chart we can see that <b> Maharashtra </b> has the highest contribution of 30.5% among all the other states.
+        </div>
+    </div>
+-->
+<div class="slide" id="slide8">
+
+    <div id="bar-graph">
+        {{ LIQUID_stacked_bar_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The bar graph provides a clear overview of the distribution of liquid schemes within Axis Mutual Fund across different Indian states. Maharashtra stands out at the top, indicating its position as the leading state in terms of hosting the highest number of liquid schemes. The graph effectively illustrates the varying counts of liquid schemes in other states as well. This visual representation succinctly showcases Maharashtra's prominence within Axis Mutual Fund's liquid scheme distribution network, underscoring its significance in this investment category.
+        </div>
+    </div>
+</div>
+    <!--
+    <div id="bar-graph">
+        {{ OTHER_DEBT_ORIENTED_SCHEMES_pie_graph_html|safe }}
+    </div>
+    <div id="bar-graph">
+        {{ GROWTH_EQUITY_ORIENTED_SCHEMES_pie_graph_html|safe }}
+    </div>
+
+    <div id="bar-graph">
+        {{ FUND_OF_FUNDS_INVESTING_DOMESTIC_pie_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The pie chart visually displays the distribution of Fund of Funds Investing Domestic schemes across various State/UTs within Axis Mutual Fund. Each slice corresponds to a specific region, reflecting their individual contributions to hosting these schemes. This concise representation offers a swift snapshot of how these schemes are spread geographically, aiding investors in understanding the regional distribution of Fund of Funds Investing Domestic schemes within Axis Mutual Fund's portfolio.
+        </div>
+    </div>
+    <div id="bar-graph">
+        {{ FUND_OF_FUNDS_INVESTING_OVERSEAS_pie_graph_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The pie chart visually illustrates the distribution of Fund of Funds Investing Overseas schemes across various State/UTs within Axis Mutual Fund. Each slice corresponds to a specific region, reflecting its contribution to hosting these schemes. This concise representation provides a quick overview of the geographic distribution, assisting investors in comprehending the regional presence of Fund of Funds Investing Overseas schemes in Axis Mutual Fund's portfolio.
+        </div>
+    </div>
+    <div id="bar-graph">
+        {{ GOLD_EXCHANGE_TRADED_pie_graph_html|safe }}
+    </div>
+     <div id="bar-graph">
+        {{ OTHER_EXCHANGE_TRADED_FUND_pie_graph_html|safe }}
+    </div>
+-->
+<div class="slide" id="slide7">
+
+    <div id="bar-graph">
+        {{ aum_overseas_html|safe }}
+    </div>
+    <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The bar graph above represents the trend of Average Assets Under Management (AAUM) for Funds of Funds - Overseas between a period of 2011 - 2023 each year having 4 quaretrs. Here values of each quaretrs are being compared Quarter wise.
+        </div>
+    </div>
+    <div id="bar-graph">
+        {{ aum_domestic_html|safe }}
+     </div>
+     <div class="analysis-section">
+        <div class="analysis-title">Analysis:</div>
+        <div class="analysis-text">
+            The bar graph above represents the trend of Average Assets Under Management (AAUM) for Funds of Funds - Domestic between a period of 2011 - 2023 each year having 4 quaretrs. Here values of each quaretrs are being compared Quarter wise.
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <p>© 2023 Sterling Software. All rights reserved.</p>
+</div>
+    <div class="navigation">
+        <button id="prevBtn">&larr;</button>
+    </div>
+    <div class="navigation2">
+        <button id="nextBtn">&rarr;</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlideIndex = 0;
+    
+        function showSlide(index) {
+            slides.forEach((slide, idx) => {
+                if (idx === index) {
+                    slide.style.display = 'block';
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+    
+            prevBtn.style.display = index === 0 ? 'none' : 'block';
+            nextBtn.style.display = index === slides.length - 1 ? 'none' : 'block';
+        }
+    
+        prevBtn.addEventListener('click', () => {
+            currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
+            showSlide(currentSlideIndex);
+        });
+    
+        nextBtn.addEventListener('click', () => {
+            currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
+            showSlide(currentSlideIndex);
+        });
+    
+        showSlide(currentSlideIndex); // Show the initial slide
+    </script>
+    
+    
+    <script>
+        window.requestAnimFrame = function()
+	{
+		return (
+			window.requestAnimationFrame       || 
+			window.webkitRequestAnimationFrame || 
+			window.mozRequestAnimationFrame    || 
+			window.oRequestAnimationFrame      || 
+			window.msRequestAnimationFrame     || 
+			function(/* function */ callback){
+				window.setTimeout(callback, 1000 / 60);
+			}
+		);
+}();
+
+var canvas = document.getElementById('canvas'); 
+var context = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+   canvas.height = window.innerHeight;
+//get DPI
+let dpi = window.devicePixelRatio || 1;
+context.scale(dpi, dpi);
+console.log(dpi);
+
+function fix_dpi() {
+//get CSS height
+//the + prefix casts it to an integer
+//the slice method gets rid of "px"
+let style_height = +getComputedStyle(canvas).getPropertyValue("height").slice(0, -2);
+let style_width = +getComputedStyle(canvas).getPropertyValue("width").slice(0, -2);
+
+//scale the canvas
+canvas.setAttribute('height', style_height * dpi);
+canvas.setAttribute('width', style_width * dpi);
+}
+
+	var particle_count = 70,
+		particles = [],
+		couleurs   = ["#000000", "#000000", "#000000","#000000"];
+    function Particle()
+    {
+
+        this.radius = Math.round((Math.random()*3)+5);
+        this.x = Math.floor((Math.random() * ((+getComputedStyle(canvas).getPropertyValue("width").slice(0, -2) * dpi) - this.radius + 1) + this.radius));
+        this.y = Math.floor((Math.random() * ((+getComputedStyle(canvas).getPropertyValue("height").slice(0, -2) * dpi) - this.radius + 1) + this.radius));
+        this.color = couleurs[Math.floor(Math.random()*couleurs.length)];
+        this.speedx = Math.round((Math.random()*201)+0)/100;
+        this.speedy = Math.round((Math.random()*201)+0)/100;
+
+        switch (Math.round(Math.random()*couleurs.length))
+        {
+            case 1:
+            this.speedx *= 1;
+            this.speedy *= 1;
+            break;
+            case 2:
+            this.speedx *= -1;
+            this.speedy *= 1;
+            break;
+            case 3:
+            this.speedx *= 1;
+            this.speedy *= -1;
+            break;
+            case 4:
+            this.speedx *= -1;
+            this.speedy *= -1;
+            break;
+        }
+            
+        this.move = function()
+        {
+            
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.fillStyle   = this.color;
+            context.globalAlpha = 1;
+            context.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
+            context.fill();
+            context.closePath();
+
+            this.x = this.x + this.speedx;
+            this.y = this.y + this.speedy;
+            //fight club//
+            if(this.x <= 0+this.radius)
+            {
+                this.speedx *= -1;
+            }
+            if(this.x >= canvas.width-this.radius)
+            {
+                this.speedx *= -1;
+            }
+            if(this.y <= 0+this.radius)
+            {
+                this.speedy *= -1;
+            }
+            if(this.y >= canvas.height-this.radius)
+            {
+                this.speedy *= -1;
+            }
+
+            for (var j = 0; j < particle_count; j++)
+            {
+                var particleActuelle = particles[j],
+                    yd = particleActuelle.y - this.y,
+                    xd = particleActuelle.x - this.x,
+                    d  = Math.sqrt(xd * xd + yd * yd);
+
+                if ( d < 200 )
+                {
+                    context.beginPath();
+                    context.globalAlpha = (200 - d) / (200 - 0);
+                    context.globalCompositeOperation = 'destination-over';
+                    context.lineWidth = 1;
+                    context.moveTo(this.x, this.y);
+                    context.lineTo(particleActuelle.x, particleActuelle.y);
+                    context.strokeStyle = this.color;
+                    context.lineCap = "round";
+                    context.stroke();
+                    context.closePath();
+                }
+            }
+        };
+    };
+    for (var i = 0; i < particle_count; i++)
+    {
+        fix_dpi();
+        var particle = new Particle();
+        particles.push(particle);
+    }
+    function animate()
+    {
+        fix_dpi();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particle_count; i++)
+        {
+            particles[i].move();
+        }
+        requestAnimFrame(animate);
+    }
+    
+    
+
+   
+    animate(); 
+
+    </script>
+    <style>
+        /* Add this CSS code to your <style> section */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            top:10%;
+        }
+    </style>
+    <script>
+        // ... (existing JavaScript code) ...
+    
+        // Add this script to handle the pop-up animation
+        const imagePopups = document.querySelectorAll('.image-popup');
+    
+        imagePopups.forEach(imagePopup => {
+            imagePopup.addEventListener('click', () => {
+                imagePopup.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    imagePopup.style.transform = 'scale(1)';
+                }, 300); // Adjust the duration to match your CSS transition duration
+            });
+        });
+    </script>
+    <script>
+    // ... (existing JavaScript code) ...
+
+    var particle_count = 70,
+        particles = [],
+        couleurs = ["#FF1493", "#00FF00", "#00CED1", "#FFD700"];
+
+    // ... (rest of the JavaScript code) ...
+</script>
+
+    
+</body>
+</html>
